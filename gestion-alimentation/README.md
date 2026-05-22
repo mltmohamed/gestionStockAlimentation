@@ -1,30 +1,48 @@
-# React + TypeScript + Vite
+# Gestion Alimentation
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Application desktop de gestion de stock et de ventes, construite avec Electron,
+Vite, React et TypeScript.
 
-Currently, two official plugins are available:
+## Structure du projet
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```text
+gestion-alimentation/
+├─ electron/                 # Processus principal Electron et preload
+│  ├─ main.ts
+│  └─ preload.ts
+├─ public/                   # Assets statiques exposés par Vite
+├─ src/                      # Application React
+│  ├─ assets/                # Images et fichiers statiques du renderer
+│  ├─ components/
+│  │  └─ layout/             # Structure globale: sidebar, topbar, footer
+│  ├─ config/                # Configuration UI: navigation, titres
+│  ├─ pages/                 # Pages principales de l'application
+│  │  ├─ dashboard/
+│  │  ├─ sales/
+│  │  ├─ customers/
+│  │  ├─ inventory/
+│  │  ├─ reports/
+│  │  └─ settings/
+│  ├─ types/                 # Types TypeScript partagés
+│  ├─ App.tsx
+│  └─ main.tsx
+├─ index.html
+├─ package.json
+└─ vite.config.ts
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Scripts
+
+```bash
+npm run dev
+npm run build
+npm run lint
+```
+
+## Prochaines fondations à ajouter
+
+- Une couche `services/` ou `database/` pour SQLite côté Electron.
+- Des modules métier par domaine: ventes, clients, articles, stock.
+- Des composants UI réutilisables pour formulaires, tableaux et modales.
+- Des dépendances locales pour Tailwind, Font Awesome et Chart.js afin de ne
+  plus dépendre des CDN dans l'application desktop.
